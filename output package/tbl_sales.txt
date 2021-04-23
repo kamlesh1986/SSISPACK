@@ -1,0 +1,5 @@
+id,SalesPersonFirstName,SalesPersonLastName,ProductName,ItemSold,SoldPrice,SoldDate,City,State,Country,Region,ItemSolds
+22,Kamleshk,Solanki,TV,1,20000,2021-04-08 12:33:43.360,Indore,MP,India,Asia,5
+23,RahulR,Singh,Remote,0,100,2021-04-08 12:33:43.360,Indore,MP,Pakistan,Asia,2
+23,RahulR,Singh,Remote,0,100,2021-04-08 12:33:43.360,Indore,MP,Pakistan,Asia,2
+25,RahulR,Singh,Remote,0,100,2021-04-08 12:33:43.360,Indore,MP,Pakistan,Asia,2

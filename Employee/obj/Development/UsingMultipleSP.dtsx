@@ -1,0 +1,696 @@
+<?xml version="1.0"?>
+<DTS:Executable xmlns:DTS="www.microsoft.com/SqlServer/Dts"
+  DTS:refId="Package"
+  DTS:CreationDate="4/20/2021 7:24:16 PM"
+  DTS:CreationName="Microsoft.Package"
+  DTS:CreatorComputerName="YI1011572LT"
+  DTS:CreatorName="YASH\kamlesh.solanki"
+  DTS:DTSID="{77D3CE36-4B01-4535-A333-A4ABFB5C1A73}"
+  DTS:ExecutableType="Microsoft.Package"
+  DTS:LastModifiedProductVersion="15.0.2000.150"
+  DTS:LocaleID="16393"
+  DTS:ObjectName="UsingMultipleSP"
+  DTS:PackageType="5"
+  DTS:VersionBuild="1"
+  DTS:VersionGUID="{0DDB181D-0435-429D-93B2-0C3C4777A094}">
+  <DTS:Property
+    DTS:Name="PackageFormatVersion">8</DTS:Property>
+  <DTS:ConnectionManagers>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[Flat File Connection Manager]"
+      DTS:CreationName="FLATFILE"
+      DTS:DTSID="{D2C3AB23-0E15-4CA7-8B34-F31296DDB61C}"
+      DTS:ObjectName="Flat File Connection Manager">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:Format="Delimited"
+          DTS:LocaleID="16393"
+          DTS:HeaderRowDelimiter="_x000D__x000A_"
+          DTS:ColumnNamesInFirstDataRow="True"
+          DTS:RowDelimiter=""
+          DTS:TextQualifier="_x003C_none_x003E_"
+          DTS:CodePage="1252"
+          DTS:ConnectionString="D:\SSIS Project\2017\Employee_SSIS\output package\UsingMultipleSP.txt">
+          <DTS:FlatFileColumns>
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:DataType="3"
+              DTS:TextQualified="True"
+              DTS:ObjectName="id"
+              DTS:DTSID="{13965B3C-8A9B-44DD-A16F-4CB2242B4391}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SalespersonFname"
+              DTS:DTSID="{C249FEC2-919A-4DA7-A77A-2ADC5B92D5CD}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x002C_"
+              DTS:MaximumWidth="50"
+              DTS:DataType="129"
+              DTS:TextQualified="True"
+              DTS:ObjectName="SalespersonLName"
+              DTS:DTSID="{4D1DF082-F1CB-444C-9CBB-8339AF19A6F3}"
+              DTS:CreationName="" />
+            <DTS:FlatFileColumn
+              DTS:ColumnType="Delimited"
+              DTS:ColumnDelimiter="_x000D__x000A_"
+              DTS:DataType="16"
+              DTS:TextQualified="True"
+              DTS:ObjectName="Sid"
+              DTS:DTSID="{DCEF0DE8-9F8A-4B3B-882B-5D4A481CB5A1}"
+              DTS:CreationName="" />
+          </DTS:FlatFileColumns>
+        </DTS:ConnectionManager>
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[YI1011572LT\SQLEXPRESS.EmployeeDB]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{4024E88D-0204-41AD-A3AE-F8E8B1EEF28F}"
+      DTS:ObjectName="YI1011572LT\SQLEXPRESS.EmployeeDB">
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectionString="Data Source=YI1011572LT\SQLEXPRESS;Initial Catalog=EmployeeDB;Provider=SQLNCLI11.1;Integrated Security=SSPI;Auto Translate=False;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+  </DTS:ConnectionManagers>
+  <DTS:Variables />
+  <DTS:Executables>
+    <DTS:Executable
+      DTS:refId="Package\use of multiple SP"
+      DTS:CreationName="Microsoft.Pipeline"
+      DTS:Description="Data Flow Task"
+      DTS:DTSID="{671DCCC4-83A4-4058-B881-79D77DD29872}"
+      DTS:ExecutableType="Microsoft.Pipeline"
+      DTS:LocaleID="-1"
+      DTS:ObjectName="use of multiple SP"
+      DTS:TaskContact="Performs high-performance data extraction, transformation and loading;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved;http://www.microsoft.com/sql/support/default.asp;1">
+      <DTS:Variables />
+      <DTS:ObjectData>
+        <pipeline
+          version="1">
+          <components>
+            <component
+              refId="Package\use of multiple SP\DeleteSP"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="DeleteSP"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">
+EXEC [dbo].[USP_Salesdelete] ?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\use of multiple SP\DeleteSP.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[YI1011572LT\SQLEXPRESS.EmployeeDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[YI1011572LT\SQLEXPRESS.EmployeeDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\use of multiple SP\DeleteSP.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\use of multiple SP\DeleteSP.Inputs[OLE DB Command Input].Columns[Sid]"
+                      cachedDataType="i1"
+                      cachedName="Sid"
+                      externalMetadataColumnId="Package\use of multiple SP\DeleteSP.Inputs[OLE DB Command Input].ExternalColumns[@id]"
+                      lineageId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].Columns[Sid]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\use of multiple SP\DeleteSP.Inputs[OLE DB Command Input].ExternalColumns[@id]"
+                      dataType="i4"
+                      name="@id">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\use of multiple SP\DeleteSP.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\use of multiple SP\DeleteSP.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\use of multiple SP\DeleteSP.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\use of multiple SP\DeleteSP.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\use of multiple SP\DeleteSP.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\use of multiple SP\DeleteSP.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\use of multiple SP\DeleteSP.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\use of multiple SP\DeleteSP.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\use of multiple SP\Flat File Source"
+              componentClassID="Microsoft.FlatFileSource"
+              contactInfo="Flat File Source;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;1"
+              description="Flat File Source"
+              localeId="16393"
+              name="Flat File Source"
+              usesDispositions="true"
+              version="1">
+              <properties>
+                <property
+                  dataType="System.Boolean"
+                  description="Specifies whether zero-length columns are treated as null."
+                  name="RetainNulls">true</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of an output column containing the file name. If no name is specified, no output column containing the file name will be generated."
+                  name="FileNameColumnName"></property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\use of multiple SP\Flat File Source.Connections[FlatFileConnection]"
+                  connectionManagerID="Package.ConnectionManagers[Flat File Connection Manager]"
+                  connectionManagerRefId="Package.ConnectionManagers[Flat File Connection Manager]"
+                  name="FlatFileConnection" />
+              </connections>
+              <outputs>
+                <output
+                  refId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output]"
+                  name="Flat File Source Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].Columns[id]"
+                      dataType="i4"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[id]"
+                      lineageId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].Columns[id]"
+                      name="id"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].Columns[SalespersonFname]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SalespersonFname]"
+                      length="50"
+                      lineageId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].Columns[SalespersonFname]"
+                      name="SalespersonFname"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].Columns[SalespersonLName]"
+                      codePage="1252"
+                      dataType="str"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SalespersonLName]"
+                      length="50"
+                      lineageId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].Columns[SalespersonLName]"
+                      name="SalespersonLName"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                    <outputColumn
+                      refId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].Columns[Sid]"
+                      dataType="i1"
+                      errorOrTruncationOperation="Conversion"
+                      errorRowDisposition="FailComponent"
+                      externalMetadataColumnId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Sid]"
+                      lineageId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].Columns[Sid]"
+                      name="Sid"
+                      truncationRowDisposition="FailComponent">
+                      <properties>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the column uses the faster, locale-neutral parsing routines."
+                          name="FastParse">false</property>
+                        <property
+                          dataType="System.Boolean"
+                          description="Indicates whether the data is in binary format."
+                          name="UseBinaryFormat">false</property>
+                      </properties>
+                    </outputColumn>
+                  </outputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[id]"
+                      dataType="i4"
+                      name="id" />
+                    <externalMetadataColumn
+                      refId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SalespersonFname]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SalespersonFname" />
+                    <externalMetadataColumn
+                      refId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[SalespersonLName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="50"
+                      name="SalespersonLName" />
+                    <externalMetadataColumn
+                      refId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].ExternalColumns[Sid]"
+                      dataType="i1"
+                      name="Sid" />
+                  </externalMetadataColumns>
+                </output>
+                <output
+                  refId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Error Output]"
+                  isErrorOut="true"
+                  name="Flat File Source Error Output">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      codePage="1252"
+                      dataType="text"
+                      description="Flat File Source Error Output Column"
+                      lineageId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Error Output].Columns[Flat File Source Error Output Column]"
+                      name="Flat File Source Error Output Column" />
+                    <outputColumn
+                      refId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\use of multiple SP\Inser SP"
+              componentClassID="Microsoft.OLEDBCommand"
+              contactInfo="OLE DB Command;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;2"
+              description="Runs an SQL statement for each row in a data flow. For example, call a 'new employee setup' stored procedure for each row in the 'new employees' table. Note: running an SQL statement for each row of a large data flow may take a long time."
+              name="Inser SP"
+              usesDispositions="true"
+              version="2">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  expressionType="Notify"
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor">EXEC [dbo].[USP_SalesInsert] ?,?,?</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\use of multiple SP\Inser SP.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[YI1011572LT\SQLEXPRESS.EmployeeDB]"
+                  connectionManagerRefId="Package.ConnectionManagers[YI1011572LT\SQLEXPRESS.EmployeeDB]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\use of multiple SP\Inser SP.Inputs[OLE DB Command Input]"
+                  errorOrTruncationOperation="Command Execution"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Command Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\use of multiple SP\Inser SP.Inputs[OLE DB Command Input].Columns[id]"
+                      cachedDataType="i4"
+                      cachedName="id"
+                      externalMetadataColumnId="Package\use of multiple SP\Inser SP.Inputs[OLE DB Command Input].ExternalColumns[@id]"
+                      lineageId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].Columns[id]" />
+                    <inputColumn
+                      refId="Package\use of multiple SP\Inser SP.Inputs[OLE DB Command Input].Columns[SalespersonFname]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="SalespersonFname"
+                      externalMetadataColumnId="Package\use of multiple SP\Inser SP.Inputs[OLE DB Command Input].ExternalColumns[@salesPersonFirstName]"
+                      lineageId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].Columns[SalespersonFname]" />
+                    <inputColumn
+                      refId="Package\use of multiple SP\Inser SP.Inputs[OLE DB Command Input].Columns[SalespersonLName]"
+                      cachedCodepage="1252"
+                      cachedDataType="str"
+                      cachedLength="50"
+                      cachedName="SalespersonLName"
+                      externalMetadataColumnId="Package\use of multiple SP\Inser SP.Inputs[OLE DB Command Input].ExternalColumns[@SalesPersonLastName]"
+                      lineageId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output].Columns[SalespersonLName]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\use of multiple SP\Inser SP.Inputs[OLE DB Command Input].ExternalColumns[@id]"
+                      dataType="i4"
+                      name="@id">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">81</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\use of multiple SP\Inser SP.Inputs[OLE DB Command Input].ExternalColumns[@salesPersonFirstName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="@salesPersonFirstName">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                    <externalMetadataColumn
+                      refId="Package\use of multiple SP\Inser SP.Inputs[OLE DB Command Input].ExternalColumns[@SalesPersonLastName]"
+                      codePage="1252"
+                      dataType="str"
+                      length="100"
+                      name="@SalesPersonLastName">
+                      <properties>
+                        <property
+                          dataType="System.Int32"
+                          description="Parameter information.  Matches OLE DB's DBPARAMFLAGSENUM values."
+                          name="DBParamInfoFlags">65</property>
+                      </properties>
+                    </externalMetadataColumn>
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\use of multiple SP\Inser SP.Outputs[OLE DB Command Output]"
+                  exclusionGroup="1"
+                  name="OLE DB Command Output"
+                  synchronousInputId="Package\use of multiple SP\Inser SP.Inputs[OLE DB Command Input]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\use of multiple SP\Inser SP.Outputs[OLE DB Command Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Command Error Output"
+                  synchronousInputId="Package\use of multiple SP\Inser SP.Inputs[OLE DB Command Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\use of multiple SP\Inser SP.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\use of multiple SP\Inser SP.Outputs[OLE DB Command Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\use of multiple SP\Inser SP.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\use of multiple SP\Inser SP.Outputs[OLE DB Command Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+            <component
+              refId="Package\use of multiple SP\Multicast"
+              componentClassID="Microsoft.Multicast"
+              contactInfo="Multicast;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;0"
+              description="Distributes every input row to every row in one or more outputs. For example, branch your data flow to make a copy of data so that some values can be masked before sharing with external partners."
+              name="Multicast">
+              <inputs>
+                <input
+                  refId="Package\use of multiple SP\Multicast.Inputs[Multicast Input 1]"
+                  name="Multicast Input 1">
+                  <externalMetadataColumns />
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\use of multiple SP\Multicast.Outputs[Multicast Output 1]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 1"
+                  synchronousInputId="Package\use of multiple SP\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\use of multiple SP\Multicast.Outputs[Multicast Output 2]"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 2"
+                  synchronousInputId="Package\use of multiple SP\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+                <output
+                  refId="Package\use of multiple SP\Multicast.Outputs[Multicast Output 3]"
+                  dangling="true"
+                  deleteOutputOnPathDetached="true"
+                  name="Multicast Output 3"
+                  synchronousInputId="Package\use of multiple SP\Multicast.Inputs[Multicast Input 1]">
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
+          </components>
+          <paths>
+            <path
+              refId="Package\use of multiple SP.Paths[Flat File Source Output]"
+              endId="Package\use of multiple SP\Multicast.Inputs[Multicast Input 1]"
+              name="Flat File Source Output"
+              startId="Package\use of multiple SP\Flat File Source.Outputs[Flat File Source Output]" />
+            <path
+              refId="Package\use of multiple SP.Paths[Multicast Output 1]"
+              endId="Package\use of multiple SP\Inser SP.Inputs[OLE DB Command Input]"
+              name="Multicast Output 1"
+              startId="Package\use of multiple SP\Multicast.Outputs[Multicast Output 1]" />
+            <path
+              refId="Package\use of multiple SP.Paths[Multicast Output 2]"
+              endId="Package\use of multiple SP\DeleteSP.Inputs[OLE DB Command Input]"
+              name="Multicast Output 2"
+              startId="Package\use of multiple SP\Multicast.Outputs[Multicast Output 2]" />
+          </paths>
+        </pipeline>
+      </DTS:ObjectData>
+    </DTS:Executable>
+  </DTS:Executables>
+  <DTS:DesignTimeProperties><![CDATA[<?xml version="1.0"?>
+<!--This CDATA section contains the layout information of the package. The section includes information such as (x,y) coordinates, width, and height.-->
+<!--If you manually edit this section and make a mistake, you can delete it. -->
+<!--The package will still be able to load normally but the previous layout information will be lost and the designer will automatically re-arrange the elements on the design surface.-->
+<Objects
+  Version="8">
+  <!--Each node below will contain properties that do not affect runtime behavior.-->
+  <Package
+    design-time-name="Package">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        <NodeLayout
+          Size="164,42.6666666666667"
+          Id="Package\use of multiple SP"
+          TopLeft="266.874996023253,115.699997931123" />
+      </GraphLayout>
+    </LayoutInfo>
+  </Package>
+  <TaskHost
+    design-time-name="Package\use of multiple SP">
+    <LayoutInfo>
+      <GraphLayout
+        Capacity="8" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
+        <NodeLayout
+          Size="152,42.6666666666667"
+          Id="Package\use of multiple SP\Flat File Source"
+          TopLeft="169.833333333333,5.50000000000004" />
+        <NodeLayout
+          Size="121.333333333334,42.6666666666667"
+          Id="Package\use of multiple SP\Multicast"
+          TopLeft="185.166666666667,108.166666666667" />
+        <EdgeLayout
+          Id="Package\use of multiple SP.Paths[Flat File Source Output]"
+          TopLeft="245.833333333333,48.1666666666667">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="0,60.0000000000001"
+              Start="0,0"
+              End="0,52.5000000000001">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,52.5000000000001" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <NodeLayout
+          Size="118.666666666667,42.6666666666667"
+          Id="Package\use of multiple SP\Inser SP"
+          TopLeft="2.72222226361437,228.166666356723" />
+        <NodeLayout
+          Size="121.333333333334,42.6666666666667"
+          Id="Package\use of multiple SP\DeleteSP"
+          TopLeft="399.055552368363,232.49999961257" />
+        <EdgeLayout
+          Id="Package\use of multiple SP.Paths[Multicast Output 1]"
+          TopLeft="226.944444444444,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="-164.888888847497,77.3333330233893"
+              Start="0,0"
+              End="-164.888888847497,69.8333330233893">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,27.5372377622498" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,27.5372377622498"
+                    Point2="0,31.5372377622498"
+                    Point3="-4,31.5372377622498" />
+                  <mssgle:LineSegment
+                    End="-160.888888847497,31.5372377622498" />
+                  <mssgle:CubicBezierSegment
+                    Point1="-160.888888847497,31.5372377622498"
+                    Point2="-164.888888847497,31.5372377622498"
+                    Point3="-164.888888847497,35.5372377622498" />
+                  <mssgle:LineSegment
+                    End="-164.888888847497,69.8333330233893" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+        <EdgeLayout
+          Id="Package\use of multiple SP.Paths[Multicast Output 2]"
+          TopLeft="264.722222222222,150.833333333333">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="194.999996812807,81.6666662792365"
+              Start="0,0"
+              End="194.999996812807,74.1666662792365">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,29.3044105433763" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,29.3044105433763"
+                    Point2="0,33.3044105433763"
+                    Point3="4,33.3044105433763" />
+                  <mssgle:LineSegment
+                    End="190.999996812807,33.3044105433763" />
+                  <mssgle:CubicBezierSegment
+                    Point1="190.999996812807,33.3044105433763"
+                    Point2="194.999996812807,33.3044105433763"
+                    Point3="194.999996812807,37.3044105433763" />
+                  <mssgle:LineSegment
+                    End="194.999996812807,74.1666662792365" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
+      </GraphLayout>
+    </LayoutInfo>
+  </TaskHost>
+</Objects>]]></DTS:DesignTimeProperties>
+</DTS:Executable>

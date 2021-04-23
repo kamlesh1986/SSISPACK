@@ -1,0 +1,1 @@
+Insert into testdata(name,class) values('Riyansh','first')
