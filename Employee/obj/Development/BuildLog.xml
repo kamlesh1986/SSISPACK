@@ -2,7 +2,7 @@
 <BuildLog xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <ProjectInfo>
     <Name>Employee</Name>
-    <LastWriteTime>2021-04-22T10:45:51.8447345Z</LastWriteTime>
+    <LastWriteTime>2021-04-26T13:19:40.2505338Z</LastWriteTime>
     <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
   </ProjectInfo>
   <LastBuildInfos>
@@ -44,6 +44,11 @@
     <ProjectBuildItemInfo>
       <Name>fromExcel.dtsx</Name>
       <LastWriteTime>2021-04-22T10:45:51.7475711Z</LastWriteTime>
+      <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
+    </ProjectBuildItemInfo>
+    <ProjectBuildItemInfo>
+      <Name>SPWithOutputParameter.dtsx</Name>
+      <LastWriteTime>2021-04-26T13:24:48.1217106Z</LastWriteTime>
       <LastKnownProtectionLevel>EncryptSensitiveWithUserKey</LastKnownProtectionLevel>
     </ProjectBuildItemInfo>
   </LastBuildInfos>
